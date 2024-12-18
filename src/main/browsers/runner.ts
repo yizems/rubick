@@ -16,10 +16,10 @@ const getRelativePath = (indexPath) => {
 };
 
 const getPreloadPath = (plugin, pluginIndexPath) => {
-  const { name, preload, tplPath, indexPath } = plugin;
+  const { originName, preload, tplPath, indexPath } = plugin;
   if (!preload) return;
   if (commonConst.dev()) {
-    if (name === 'rubick-system-feature') {
+    if (originName === 'rubick-system-feature') {
       return path.resolve(__static, `../feature/public/preload.js`);
     }
     if (tplPath) {
@@ -112,6 +112,7 @@ export default () => {
     let preloadPath;
     let darkMode;
     // 开发环境
+    console.log(`dev:::${commonConst.dev()}`);
     if (commonConst.dev() && development) {
       pluginIndexPath = development;
       const pluginPath = path.resolve(baseDir, 'node_modules', name);
@@ -127,8 +128,10 @@ export default () => {
       const pluginPath = path.resolve(baseDir, 'node_modules', name);
       pluginIndexPath = `file://${path.join(pluginPath, './', main)}`;
     }
+    console.log(`plugin:: ${JSON.stringify(plugin)}`);
+    console.log(`plugin:${plugin.name}, pluginIndexPath:${pluginIndexPath}, preloadPath:${preloadPath}`);
     const preload = getPreloadPath(plugin, preloadPath || pluginIndexPath);
-
+    console.log(`plugin:${plugin.name},preload:${preload}`);
     const ses = session.fromPartition('<' + name + '>');
     ses.setPreloads([`${__static}/preload.js`]);
 
