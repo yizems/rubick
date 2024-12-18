@@ -58,7 +58,7 @@ const registerHotKey = (mainWindow: BrowserWindow): void => {
   };
 
   const init = async () => {
-    await setAutoLogin();
+    // await setAutoLogin();
     await setDarkMode();
     await setTheme();
     const config = await localConfig.getConfig();
