@@ -78,15 +78,15 @@ const registerHotKey = (mainWindow: BrowserWindow): void => {
       mainWindow.show();
     });
 
-    globalShortcut.register(config.perf.shortCut.capture, () => {
-      screenCapture(mainWindow, (data) => {
-        data &&
-          new Notification({
-            title: '截图完成',
-            body: '截图已存储到系统剪贴板中',
-          }).show();
-      });
-    });
+    // globalShortcut.register(config.perf.shortCut.capture, () => {
+    //   screenCapture(mainWindow, (data) => {
+    //     data &&
+    //       new Notification({
+    //         title: '截图完成',
+    //         body: '截图已存储到系统剪贴板中',
+    //       }).show();
+    //   });
+    // });
 
     globalShortcut.register(config.perf.shortCut.quit, () => {
       // mainWindow.webContents.send('init-rubick');
