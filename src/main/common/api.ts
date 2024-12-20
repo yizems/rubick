@@ -362,6 +362,7 @@ class API extends DBInstance {
     let keys = [key.toLowerCase()];
     if (modifier && Array.isArray(modifier) && modifier.length > 0) {
       keys = modifier.concat(keys);
+      console.log(keys);
       ks.sendCombination(keys);
     } else {
       ks.sendKeys(keys);
