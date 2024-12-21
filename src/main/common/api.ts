@@ -12,6 +12,7 @@ import {
 import fs from 'fs';
 import { screenCapture } from '@/core';
 import plist from 'plist';
+import CommonConst from '@/common/utils/commonConst';
 
 import {
   DECODE_KEY,
@@ -26,7 +27,7 @@ import DBInstance from './db';
 import getWinPosition from './getWinPosition';
 import path from 'path';
 import commonConst from '@/common/utils/commonConst';
-import { keyboard } from '@nut-tree-fork/nut-js';
+import { keyboard, Key } from '@nut-tree-fork/nut-js';
 
 const runnerInstance = runner();
 const detachInstance = detach();
@@ -356,6 +357,58 @@ class API extends DBInstance {
 
   public getCopyFiles() {
     return getCopyFiles();
+  }
+
+  public backToOtherWindow() {
+    if (CommonConst.macOS()) {
+      keyboard
+        .type(Key.LeftCmd, Key.Tab)
+        .then(() => {
+          console.log('backToOtherWindow done');
+        })
+        .catch((e) => {
+          console.error(`backToOtherWindow error::${e}`);
+        });
+    } else {
+      keyboard
+        .type(Key.LeftAlt, Key.Tab)
+        .then(() => {
+          console.log('backToOtherWindow done');
+        })
+        .catch((e) => {
+          console.error(`backToOtherWindow error::${e}`);
+        });
+    }
+  }
+
+  public backToOtherWindowAndPaste() {
+    this.backToOtherWindow();
+    setTimeout(() => {
+      this.paste();
+    }, 50);
+    this.paste();
+  }
+
+  public paste() {
+    if (CommonConst.macOS()) {
+      keyboard
+        .type(Key.LeftCmd, Key.V)
+        .then(() => {
+          console.log('paste done');
+        })
+        .catch((e) => {
+          console.error(`paste error::${e}`);
+        });
+    } else {
+      keyboard
+        .type(Key.LeftControl, Key.V)
+        .then(() => {
+          console.log('paste done');
+        })
+        .catch((e) => {
+          console.error(`paste error::${e}`);
+        });
+    }
   }
 
   public simulateKeyboardTap({ data: { keys } }) {

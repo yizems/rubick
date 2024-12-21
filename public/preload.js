@@ -185,6 +185,18 @@ window.rubick = {
     return ipcSendSync('getCopyFiles');
   },
 
+  backToOtherWindow: () => {
+    ipcSend('backToOtherWindow');
+  },
+
+  paste: () => {
+    ipcSend('paste');
+  },
+
+  backToOtherWindowAndPaste: () => {
+    ipcSend('backToOtherWindowAndPaste');
+  },
+
   simulateKeyboardTap: (...keys) => {
     ipcSend('simulateKeyboardTap', { keys });
   },
