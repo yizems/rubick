@@ -185,8 +185,8 @@ window.rubick = {
     return ipcSendSync('getCopyFiles');
   },
 
-  simulateKeyboardTap: (key, ...modifier) => {
-    ipcSend('simulateKeyboardTap', { key, modifier });
+  simulateKeyboardTap: (...keys) => {
+    ipcSend('simulateKeyboardTap', { keys });
   },
 
   getCursorScreenPoint: () => {

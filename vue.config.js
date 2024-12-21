@@ -27,6 +27,7 @@ module.exports = {
         'npm',
         'electron-screenshots',
         '@electron/remote',
+        '@nut-tree-fork/nut-js'
       ],
       // Use this to change the entry point of your app's render process. default src/[main|index].[js|ts]
       builderOptions: {

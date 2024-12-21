@@ -12,7 +12,6 @@ import {
 import fs from 'fs';
 import { screenCapture } from '@/core';
 import plist from 'plist';
-import ks from 'node-key-sender';
 
 import {
   DECODE_KEY,
@@ -27,6 +26,7 @@ import DBInstance from './db';
 import getWinPosition from './getWinPosition';
 import path from 'path';
 import commonConst from '@/common/utils/commonConst';
+import { keyboard } from '@nut-tree-fork/nut-js';
 
 const runnerInstance = runner();
 const detachInstance = detach();
@@ -358,15 +358,16 @@ class API extends DBInstance {
     return getCopyFiles();
   }
 
-  public simulateKeyboardTap({ data: { key, modifier } }) {
-    let keys = [key.toLowerCase()];
-    if (modifier && Array.isArray(modifier) && modifier.length > 0) {
-      keys = modifier.concat(keys);
-      console.log(keys);
-      ks.sendCombination(keys);
-    } else {
-      ks.sendKeys(keys);
-    }
+  public simulateKeyboardTap({ data: { keys } }) {
+    console.log(`simulateKeyboardTap::${keys}`);
+    keyboard
+      .type(...keys)
+      .then(() => {
+        console.log(`simulateKeyboardTap::done::${keys}`);
+      })
+      .catch((e) => {
+        console.error(`simulateKeyboardTap::error::${e}`);
+      });
   }
 
   public addLocalStartPlugin({ data: { plugin } }, window) {
