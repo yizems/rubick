@@ -77,6 +77,7 @@ const createPluginManager = (): any => {
   };
 
   const openPlugin = async (plugin, option) => {
+    // window.rubick && window.rubick.log('render::openPlugin', JSON.stringify(plugin));
     ipcRenderer.send('msg-trigger', {
       type: 'removePlugin',
     });

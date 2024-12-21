@@ -108,6 +108,7 @@ export default () => {
       pluginSetting,
       ext,
     } = plugin;
+    // console.log(`createView::`, plugin);
     let pluginIndexPath = tplPath || indexPath;
     let preloadPath;
     let darkMode;
@@ -116,7 +117,7 @@ export default () => {
     if (commonConst.dev() && development) {
       pluginIndexPath = development;
       const pluginPath = path.resolve(baseDir, 'node_modules', name);
-      preloadPath = `file://${path.join(pluginPath, './', main)}`;
+      preloadPath = pluginPath;
     }
     // 再尝试去找
     if (plugin.name === 'rubick-system-feature' && !pluginIndexPath) {
@@ -128,10 +129,10 @@ export default () => {
       const pluginPath = path.resolve(baseDir, 'node_modules', name);
       pluginIndexPath = `file://${path.join(pluginPath, './', main)}`;
     }
-    console.log(`plugin:: ${JSON.stringify(plugin)}`);
-    console.log(`plugin:${plugin.name}, pluginIndexPath:${pluginIndexPath}, preloadPath:${preloadPath}`);
+    console.log('pluginIndexPath', pluginIndexPath);
+
     const preload = getPreloadPath(plugin, preloadPath || pluginIndexPath);
-    console.log(`plugin:${plugin.name},preload:${preload}`);
+    console.log('preload', preload);
     const ses = session.fromPartition('<' + name + '>');
     ses.setPreloads([`${__static}/preload.js`]);
 

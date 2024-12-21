@@ -31,5 +31,7 @@ export default function pluginClickEvent({
       ? 'http://localhost:8081/#/'
       : `file://${__static}/feature/index.html`;
   }
+  window.rubick &&
+    window.rubick.log('pluginClickEvent::', JSON.stringify(pluginDist));
   openPlugin(pluginDist, option);
 }

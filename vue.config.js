@@ -20,7 +20,7 @@ module.exports = {
     electronBuilder: {
       nodeIntegration: true,
       mainProcessFile: 'src/main/index.ts',
-      mainProcessWatch: ['src/main'],
+      mainProcessWatch: ['src'],
       externals: [
         'pouchdb',
         'extract-file-icon',

@@ -53,6 +53,7 @@ const optionsManager = ({
   };
 
   const getOptionsFromSearchValue = (value, strict = false) => {
+    // window.rubick && window.rubick.log('render::getOptionsFromSearchValue');
     const localPlugins = getGlobal('LOCAL_PLUGINS').getLocalPlugins();
     let options: any = [];
     // todo 先搜索 plugin
@@ -139,9 +140,13 @@ const optionsManager = ({
     return options;
   };
 
-  watch(searchValue, () => search(searchValue.value));
+  watch(searchValue, () => {
+    // window.rubick && window.rubick.log(`render::searchValue::${searchValue}`);
+    return search(searchValue.value);
+  });
   // search Input operation
   const search = debounce((value) => {
+    // window.rubick && window.rubick.log('render::search');
     if (currentPlugin.value.name) return;
     if (clipboardFile.value.length) return;
     if (!value) {

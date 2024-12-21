@@ -48,6 +48,7 @@ global.LOCAL_PLUGINS = {
     return global.LOCAL_PLUGINS.PLUGINS;
   },
   refreshPlugin(plugin) {
+    console.log(plugin);
     // 获取 dev 插件信息
     const pluginPath = path.resolve(baseDir, 'node_modules', plugin.name);
     const pluginInfo = JSON.parse(
@@ -66,7 +67,7 @@ global.LOCAL_PLUGINS = {
       }
       return p;
     });
-
+    console.log('refresh-plugin::', plugin);
     // 存入
     global.LOCAL_PLUGINS.PLUGINS = currentPlugins;
     fs.writeFileSync(configPath, JSON.stringify(currentPlugins));

@@ -36,6 +36,7 @@ class API extends DBInstance {
   init(mainWindow: BrowserWindow) {
     // 响应 preload.js 事件
     ipcMain.on('msg-trigger', async (event, arg) => {
+      // console.log('msg-trigger', arg);
       const window = arg.winId ? BrowserWindow.fromId(arg.winId) : mainWindow;
       const data = await this[arg.type](arg, window, event);
       event.returnValue = data;
@@ -84,6 +85,7 @@ class API extends DBInstance {
   }
 
   public openPlugin({ data: plugin }, window) {
+    console.log('openPlugin', plugin);
     if (plugin.platform && !plugin.platform.includes(process.platform)) {
       return new Notification({
         title: `插件不支持当前 ${process.platform} 系统`,
@@ -437,6 +439,10 @@ class API extends DBInstance {
         plugin,
       })})`
     );
+  }
+
+  public log({ data: { args } }) {
+    console.log(...args);
   }
 }
 

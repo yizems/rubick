@@ -96,6 +96,7 @@ interface Rubick {
   backToOtherWindowAndPaste(): void;
 
   paste(): void;
+  log: (...args) => void;
 }
 
 interface Hooks {

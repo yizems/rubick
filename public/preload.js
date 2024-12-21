@@ -209,6 +209,10 @@ window.rubick = {
     return screen.getDisplayNearestPoint(point);
   },
 
+  log: (...args) => {
+    ipcSend('log', { args });
+  },
+
   outPlugin: () => {
     return ipcSend('removePlugin');
   },

@@ -86,6 +86,7 @@ getPluginInfo({
 watch(
   [options, pluginHistory, currentPlugin],
   () => {
+    // window.rubick && window.rubick.log('render::aaaa');
     currentSelect.value = 0;
     if (currentPlugin.value.name) return;
     window.rubick.setExpendHeight(
@@ -127,6 +128,7 @@ const openMenu = (ext) => {
 window.rubick.openMenu = openMenu;
 
 const choosePlugin = (plugin) => {
+  // window.rubick && window.rubick.log('render::choosePlugin', JSON.stringify(plugin));
   if (options.value.length) {
     const currentChoose = options.value[currentSelect.value];
     currentChoose.click();
@@ -178,13 +180,16 @@ const clearSearchValue = () => {
 
 <style lang="less">
 @import './assets/var.less';
+
 #components-layout {
   height: 100vh;
   overflow: hidden;
   background: var(--color-body-bg);
+
   ::-webkit-scrollbar {
     width: 0;
   }
+
   &.drag {
     -webkit-app-region: drag;
   }
