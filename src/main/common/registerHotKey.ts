@@ -88,10 +88,10 @@ const registerHotKey = (mainWindow: BrowserWindow): void => {
     //   });
     // });
 
-    globalShortcut.register(config.perf.shortCut.quit, () => {
-      // mainWindow.webContents.send('init-rubick');
-      // mainWindow.show();
-    });
+    // globalShortcut.register(config.perf.shortCut.quit, () => {
+    //   // mainWindow.webContents.send('init-rubick');
+    //   // mainWindow.show();
+    // });
 
     // 注册自定义全局快捷键
     config.global.forEach((sc) => {
