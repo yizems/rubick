@@ -70,6 +70,7 @@ class API extends DBInstance {
   };
 
   public windowMoving({ data: { mouseX, mouseY, width, height } }, window, e) {
+    console.log('windowMoving', window, mouseX, mouseY, width, height);
     const { x, y } = screen.getCursorScreenPoint();
     const originWindow = this.getCurrentWindow(window, e);
     if (!originWindow) return;

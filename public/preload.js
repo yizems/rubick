@@ -217,6 +217,14 @@ window.rubick = {
     return ipcSend('removePlugin');
   },
 
+  windowMoving: (mouseX, mouseY, width, height) => {
+    ipcSend('windowMoving', {
+      mouseX,
+      mouseY,
+      width,
+      height,
+    });
+  },
   createBrowserWindow: (url, options, callback) => {
     const winUrl = path.resolve(baseDir, 'node_modules', options.name);
     const winIndex = `file://${path.join(winUrl, './', url || '')}`;

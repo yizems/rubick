@@ -97,6 +97,7 @@ interface Rubick {
 
   paste(): void;
   log: (...args) => void;
+  windowMoving: (mouseX, mouseY, width, height) => void;
 }
 
 interface Hooks {
