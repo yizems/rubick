@@ -3,7 +3,7 @@ import localConfig from '../common/initLocalConfig';
 import commonConst from '@/common/utils/commonConst';
 import path from 'path';
 import { WINDOW_MIN_HEIGHT } from '@/common/constans/common';
-import mainInstance from '@/main';
+
 export default () => {
   let win: any;
 
@@ -19,11 +19,11 @@ export default () => {
 
   const createWindow = async (pluginInfo, viewInfo, view) => {
     const createWin = new BrowserWindow({
-      height: viewInfo.height,
+      height: viewInfo.height - WINDOW_MIN_HEIGHT,
       minHeight: WINDOW_MIN_HEIGHT,
       width: viewInfo.width,
       autoHideMenuBar: true,
-      titleBarStyle: 'hidden',
+      titleBarStyle: 'default',
       trafficLightPosition: { x: 12, y: 21 },
       title: pluginInfo.pluginName,
       resizable: true,
@@ -75,6 +75,13 @@ export default () => {
       createWin.webContents.executeJavaScript(
         `window.initDetach(${JSON.stringify(pluginInfo)})`
       );
+      view.setBounds({
+        x: 0,
+        y: 0,
+        width: view.getBounds().width,
+        height: view.getBounds().height - WINDOW_MIN_HEIGHT,
+      });
+      console.log('ready-to-show', view.getBounds());
       createWin.show();
     });
 
@@ -86,7 +93,7 @@ export default () => {
       const display = screen.getDisplayMatching(createWin.getBounds());
       view.setBounds({
         x: 0,
-        y: WINDOW_MIN_HEIGHT,
+        y: 0,
         width: display.workArea.width,
         height: display.workArea.height - WINDOW_MIN_HEIGHT,
       });
@@ -108,7 +115,7 @@ export default () => {
           : bounds.height - 2;
       view.setBounds({
         x: 0,
-        y: WINDOW_MIN_HEIGHT,
+        y: 0,
         width,
         height: height - WINDOW_MIN_HEIGHT,
       });
