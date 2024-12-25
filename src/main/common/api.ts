@@ -38,6 +38,7 @@ class API extends DBInstance {
     ipcMain.on('msg-trigger', async (event, arg) => {
       // console.log('msg-trigger', arg);
       const window = arg.winId ? BrowserWindow.fromId(arg.winId) : mainWindow;
+      window.isMain = window === mainWindow;
       const data = await this[arg.type](arg, window, event);
       event.returnValue = data;
       // event.sender.send(`msg-back-${arg.type}`, data);
@@ -70,7 +71,8 @@ class API extends DBInstance {
   };
 
   public windowMoving({ data: { mouseX, mouseY, width, height } }, window, e) {
-    console.log('windowMoving', window, mouseX, mouseY, width, height);
+    console.log('windowMoving::isMainWindow', window.isMain);
+    // console.log('windowMoving', window, mouseX, mouseY, width, height);
     const { x, y } = screen.getCursorScreenPoint();
     const originWindow = this.getCurrentWindow(window, e);
     if (!originWindow) return;
@@ -157,6 +159,7 @@ class API extends DBInstance {
   }
 
   public setExpendHeight({ data: height }, window: BrowserWindow, e) {
+    console.log('setExpendHeight::isMainWindow', window.isMain);
     const originWindow = this.getCurrentWindow(window, e);
     if (!originWindow) return;
     const targetHeight = height;
