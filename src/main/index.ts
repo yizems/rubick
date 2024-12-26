@@ -21,7 +21,7 @@ import {
 
 import '../common/utils/localPlugin';
 
-import checkVersion from './common/versionHandler';
+// import checkVersion from './common/versionHandler';
 import registerSystemPlugin from './common/registerSystemPlugin';
 
 class App {

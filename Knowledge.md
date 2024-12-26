@@ -28,3 +28,21 @@
   - new BrowserWindow to load plugin
   - once launched, execute viewReadyFn -> executeHooks('PluginEnter', ext); -> executeHooks('PluginReady', ext);
   - ext is the params which you enter and matched plugin declared
+
+
+## 分离plugin
+
+- fixed
+  - 增加状态栏支持最大化最小化: `titleBarStyle: 'default',`
+  - 修复分离后内容头部有一片空白: `ready-to-show`中 设置 `view.setBounds({`
+- 核心代码
+  - [api.ts](src/main/common/api.ts)#detachPlugin
+  - [detach.ts](src/main/browsers/detach.ts) 去创建新的 BrowserWindow 来显示plugin
+  - 直接将 view 从原来的 BrowserWindow 中移除, 然后添加到新的 BrowserWindow 中
+
+
+## 安装插件
+[index.ts](src/core/plugin-handler/index.ts)
+
+- 通过 `npm install` 安装远程插件
+- 通过 `npm link` 安装本地插件
